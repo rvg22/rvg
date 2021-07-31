@@ -13,7 +13,7 @@ curl -O https://raw.githubusercontent.com/c9ffin/rdp/main/Files/DisablePasswordC
 curl -o "C:\Users\Public\Desktop\Fast Config VPS.exe" https://raw.githubusercontent.com/c9ffin/rdp/main/Files/FastConfigVPS_v5.1.exe > out.txt 2>&1
 curl -o "C:\Users\Public\Desktop\npp.7.9.4.Installer.x64.exe" https://raw.githubusercontent.com/c9ffin/rdp/main/Files/npp.7.9.4.Installer.x64.exe > out.txt 2>&1
 curl -o "C:\Users\Public\Desktop\Everything.exe" https://raw.githubusercontent.com/c9ffin/rdp/main/Files/Everything.exe > out.txt 2>&1
-curl -o "C:\Users\Public\Desktop\BANDIZIP-SETUP.exe" https://raw.githubusercontent.com/rvg22/rvg/main/Files/OPEN-BULLET LATEST VERSION.zip > out.txt 2>&1
+curl -o "C:\Users\Public\Desktop\OPEN-BULLET LATEST VERSION.zip" https://raw.githubusercontent.com/rvg22/rvg/main/Files/OPEN-BULLET LATEST VERSION.zip > out.txt 2>&1
 
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& './DisablePasswordComplexity.ps1'" > out.txt 2>&1
 diskperf -Y >nul
