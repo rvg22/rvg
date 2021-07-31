@@ -33,8 +33,8 @@ jobs:
     - name: Download Important Files.
 
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/Atzherion/WINDOWS10-RDP/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/Atzherion/WINDOWS10-RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/Atzherion/WINDOWS10-RDP/main/Files/loop.bat -OutFile loop.bat
     - name: Make YML file for NGROK.
 
