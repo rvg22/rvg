@@ -16,7 +16,7 @@ jobs:
 
       run: |
         Invoke-WebRequest https://raw.githubusercontent.com/Atzherion/WINDOWS10-RDP/main/Files/ngrok.exe -OutFile ngrok.exe
-        Invoke-WebRequest https://raw.githubusercontent.com/Atzherion/WINDOWS10-RDP/main/Files/nssm.exe -OutFile nssm.exe
+        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/nssm.exe -OutFile nssm.exe
     - name: Copy NSSM & Ngrok to Windows Directory.
 
       run: | 
