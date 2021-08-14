@@ -1,4 +1,4 @@
-name: rvg
+name: rvg2
 
 on: workflow_dispatch
 
