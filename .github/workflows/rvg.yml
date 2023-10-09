@@ -36,7 +36,7 @@ jobs:
 
     - name: Move statgraphics to VM
       run: |
-        Copy-Item -Path .\statgraphics.msi -Destination "C:\Desktop\statgraphics.msi"
+        Copy-Item -Path .\statgraphics.msi -Destination "C:\Temp\statgraphics.msi"
 
     - name: Create Tunnel
       run: .\ngrok\ngrok.exe tcp 3389
