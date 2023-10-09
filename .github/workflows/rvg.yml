@@ -40,9 +40,7 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
 
     -  run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/loop.bat -OutFile loop.bat
+        Invoke-WebRequest https://f.hubspotusercontent10.net/hubfs/402067/Downloads19-102/Statgraphics%20Centurion%2019%20Spanish%20X64.msi
 
     
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
