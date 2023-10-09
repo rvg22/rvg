@@ -1,8 +1,6 @@
 name: CI
 
-
 on: [push, workflow_dispatch]
-
 
 jobs:
   build:
@@ -24,21 +22,19 @@ jobs:
 
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
+    - name: Setting User (runneradmin) and Pass (P@ssw0rd!)
+
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
 
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
 
-    - name: Download loop.bat
-      run: Invoke-WebRequest https://f.hubspotusercontent10.net/hubfs/402067/Downloads19-102/Statgraphics%20Centurion%2019%20Spanish%20X64.msi -OutFile statgraphics.msi
+    - name: Download Statgraphics
+      run: Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/loop.bat -OutFile loop.bat
 
-    - name: Move loop.bat to VM
+    - name: Move statgraphics to VM
       run: |
-        Copy-Item -Path .\statgraphics.msi -Destination "C:\Desktop/statgraphics.msi"
+        Copy-Item -Path .\loop.bat -Destination "C:\path\to\desired\directory\loop.bat"
       working-directory: ${{ github.workspace }}
 
-    
-    - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
-
     - name: Create Tunnel
-
       run: .\ngrok\ngrok.exe tcp 3389
