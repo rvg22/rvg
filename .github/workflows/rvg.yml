@@ -1,55 +1,50 @@
 name: CI
 
-on:
-  push:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     - name: Download ngrok
-      run: |
-        Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-        Expand-Archive ngrok.zip -DestinationPath .
+      run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+
+    - name: Extract ngrok
+      run: Expand-Archive ngrok.zip
 
     - name: Auth ngrok
-      run: .\ngrok\ngrok.exe authtoken ${{ secrets.NGROK_AUTH_TOKEN }}
+      run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
 
-    - name: Download Important Files
+    - name: Download Important Files.
+
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-US.bat?token=GHSAT0AAAAAACIXFEBAURCNLOOPTWUVT3FKZJFWLGA -OutFile NGROK-US.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-CHECK.bat?token=GHSAT0AAAAAACIXFEBAEEQNWLPWRBX37U5IZJFWLXQ -OutFile NGROK-CHECK.bat
+    - name: Make YML file for NGROK.
 
-    - name: Make YML file for NGROK
-      run: .\NGROK-US.bat
-
+      run: start NGROK-US.bat
+      
     - name: Enable TS
-      run: |
-        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -Value 0
 
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
     - name: Set Password for User (runneradmin)
       run: |
         $username = "runneradmin"
-        $securePassword = ConvertTo-SecureString -AsPlainText "RubenVG@" -Force
-        Set-LocalUser -Name $username -Password $securePassword
+        $existingUser = Get-LocalUser -Name $username -ErrorAction SilentlyContinue
+        if ($existingUser) {
+          $securePassword = ConvertTo-SecureString -AsPlainText "RubenVG@" -Force
+          Set-LocalUser -Name $username -Password $securePassword
+        }
 
     - name: Download Statgraphics
-      run: |
-        Invoke-WebRequest "https://402067.fs1.hubspotusercontent-na1.net/hubfs/402067/Downloads19-501/Statgraphics%20Centurion%2019%20Spanish%20X64.msi" -OutFile "Statgraphics_Centurion_19_Spanish_X64.msi"
+     
+      run: Invoke-WebRequest "https://402067.fs1.hubspotusercontent-na1.net/hubfs/402067/Downloads19-501/Statgraphics%20Centurion%2019%20Spanish%20X64.msi" -OutFile "Statgraphics_Centurion_19_Spanish_X64.msi"
 
-    - name: Connect to your RDP 2core-7GB Ram
-      run: |
-        # Coloca aquí los comandos necesarios para la conexión RDP
-        
     - name: Create Tunnel
-      run: .\ngrok\ngrok.exe tcp 3389 &
-    
-    - name: Run NGROK-CHECK
-      run: cmd /c NGROK-CHECK.bat
+      run: | 
+        .\ngrok\ngrok.exe tcp 3389
+        cmd /c NGROK-CHECK.bat
