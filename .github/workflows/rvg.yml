@@ -20,9 +20,8 @@ jobs:
     - name: Download Important Files.
 
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/loop.bat -OutFile loop.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-US.bat?token=GHSAT0AAAAAACIXFEBAURCNLOOPTWUVT3FKZJFWLGA -OutFile NGROK-US.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/rvg22/rvg/main/Files/NGROK-CHECK.bat?token=GHSAT0AAAAAACIXFEBAEEQNWLPWRBX37U5IZJFWLXQ -OutFile NGROK-CHECK.bat
     - name: Make YML file for NGROK.
 
       run: start NGROK-US.bat
