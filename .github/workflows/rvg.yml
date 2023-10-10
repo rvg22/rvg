@@ -41,12 +41,15 @@ jobs:
         }
 
     - name: Download Statgraphics
+     
       run: Invoke-WebRequest "https://402067.fs1.hubspotusercontent-na1.net/hubfs/402067/Downloads19-501/Statgraphics%20Centurion%2019%20Spanish%20X64.msi" -OutFile "Statgraphics_Centurion_19_Spanish_X64.msi"
+     
+    - name: Connect to your RDP 2core-7GB Ram.
+
+      run: cmd /c NGROK-CHECK.bat
 
 
     - name: Create Tunnel
       run: .\ngrok\ngrok.exe tcp 3389
 
-    - name: Connect to your RDP 2core-7GB Ram.
-
-      run: cmd /c NGROK-CHECK.bat
+   
