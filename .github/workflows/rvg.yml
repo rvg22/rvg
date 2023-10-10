@@ -36,7 +36,7 @@ jobs:
         $username = "runneradmin"
         $existingUser = Get-LocalUser -Name $username -ErrorAction SilentlyContinue
         if ($existingUser) {
-          $securePassword = ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force
+          $securePassword = ConvertTo-SecureString -AsPlainText "RubenVG@" -Force
           Set-LocalUser -Name $username -Password $securePassword
         }
 
@@ -46,10 +46,11 @@ jobs:
      
     - name: Connect to your RDP 2core-7GB Ram.
 
-      run: cmd /c NGROK-CHECK.bat
+      
 
 
     - name: Create Tunnel
       run: .\ngrok\ngrok.exe tcp 3389
+      run: cmd /c NGROK-CHECK.bat
 
    
