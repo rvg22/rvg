@@ -45,6 +45,3 @@ jobs:
     - name: Create NGROK Tunnel
       run: | 
         .\ngrok\ngrok.exe tcp 3389
-
-    - name: Sleep for Tunnel
-      run: Start-Sleep -s 30
